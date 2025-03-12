@@ -1,0 +1,164 @@
+<!-- Objective: The goal of this project is to build a Calculator App using HTML, CSS, and JavaScript. The application should allow users to perform basic arithmetic operations like addition, subtraction, multiplication, and division. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f4f4f4;
+      }
+      .calculator {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .display {
+        width: 95%;
+        height: 50px;
+        background-color: #222;
+        color: #fff;
+        text-align: right;
+        padding: 10px;
+        font-size: 2em;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+      .button {
+        padding: 20px;
+        font-size: 1.5em;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .button.operation {
+        background-color: #f9a825;
+        color: #fff;
+      }
+      .button.equal {
+        background-color: #4caf50;
+        color: #fff;
+        grid-column: span 2;
+      }
+      .button.clear {
+        background-color: #f44336;
+        color: #fff;
+        grid-column: span 2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <div class="display">
+        <div id="previous-input"></div>
+        <div id="current-input">0</div>
+      </div>
+      <div class="buttons">
+        <button class="button" onclick="appendNumber(7)">7</button>
+        <button class="button" onclick="appendNumber(8)">8</button>
+        <button class="button" onclick="appendNumber(9)">9</button>
+        <button class="button operation" onclick="chooseOperation('/')">
+          /
+        </button>
+        <button class="button" onclick="appendNumber(4)">4</button>
+        <button class="button" onclick="appendNumber(5)">5</button>
+        <button class="button" onclick="appendNumber(6)">6</button>
+        <button class="button operation" onclick="chooseOperation('*')">
+          *
+        </button>
+        <button class="button" onclick="appendNumber(1)">1</button>
+        <button class="button" onclick="appendNumber(2)">2</button>
+        <button class="button" onclick="appendNumber(3)">3</button>
+        <button class="button operation" onclick="chooseOperation('-')">
+          -
+        </button>
+        <button class="button" onclick="appendNumber(0)">0</button>
+        <button class="button clear" onclick="clearDisplay()">C</button>
+        <button class="button equal" onclick="computeResult()">=</button>
+        <button class="button operation" onclick="chooseOperation('+')">
+          +
+        </button>
+      </div>
+    </div>
+    <script>
+      let currentInput = "";
+      let currentOperation = null;
+      let previousInput = "";
+
+      function appendNumber(number) {
+        currentInput += number;
+        updateDisplay();
+      }
+
+      function chooseOperation(operation) {
+        if (currentInput === "") return;
+        if (previousInput !== "") {
+          computeResult();
+        }
+        currentOperation = operation;
+        previousInput = currentInput;
+        currentInput = "";
+        updateDisplay();
+      }
+
+      function computeResult() {
+        let result;
+        const prev = parseFloat(previousInput);
+        const current = parseFloat(currentInput);
+        if (isNaN(prev) || isNaN(current)) return;
+        switch (currentOperation) {
+          case "+":
+            result = prev + current;
+            break;
+          case "-":
+            result = prev - current;
+            break;
+          case "*":
+            result = prev * current;
+            break;
+          case "/":
+            result = prev / current;
+            break;
+          default:
+            return;
+        }
+        currentInput = result;
+        currentOperation = null;
+        previousInput = "";
+        updateDisplay();
+      }
+
+      function clearDisplay() {
+        currentInput = "";
+        previousInput = "";
+        currentOperation = null;
+        updateDisplay();
+      }
+
+      function updateDisplay() {
+        document.getElementById("current-input").innerText =
+          currentInput || "0";
+        document.getElementById("previous-input").innerText =
+          previousInput + (currentOperation || "");
+      }
+    </script>
+  </body>
+</html>
