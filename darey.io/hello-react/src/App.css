@@ -2,40 +2,55 @@
   text-align: center;
   font-family: Arial, sans-serif;
   margin-top: 50px;
+  min-height: 100vh;
+  padding-bottom: 40px;
 }
 
-h1 {
-  color: #333;
-  font-size: 2.5rem;
+h2 {
+  color: #222;
+  margin-bottom: 24px;
 }
 
-p {
-  font-size: 1.2rem;
-  color: #555;
+.user-list {
+  list-style: none;
+  padding: 0;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
-button {
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.user-list-item {
+  background: #fff;
+  margin-bottom: 12px;
+  padding: 16px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  text-align: left;
+  transition: box-shadow 0.2s;
 }
 
-button:hover {
-  background-color: #0056b3;
+.user-list-item:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.user-email {
+  color: #007bff;
+  font-size: 0.95em;
 }
 
-p:last-child {
-  color: red;
+.loading {
+  color: #888;
+  font-size: 1.2em;
+  margin-top: 40px;
+}
+
+.error {
+  color: #d32f2f;
   font-weight: bold;
+  margin-top: 40px;
+}
+
+.empty-list {
+  color: #555;
+  margin-top: 30px;
+  font-style: italic;
 }
